@@ -27,7 +27,10 @@
         <span style="float: right">
             <c:choose>
                 <c:when test="${sessionScope.user!=null}">
-                    <a href="goToUserMenu">${sessionScope.user.u_name}</a>
+                    <form action="goToUserMenu" method="get">
+                        <input type="submit" name="viewUserMenu" value="${sessionScope.user.u_name}">
+                        <input type="hidden" name="startPage" value="0">
+                    </form>
                 </c:when>
                 <c:otherwise>
                     <a href="goToLoginPage">登录</a>

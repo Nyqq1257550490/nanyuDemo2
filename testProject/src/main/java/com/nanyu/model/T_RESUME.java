@@ -1,13 +1,15 @@
 package com.nanyu.model;
 
+import java.io.Serializable;
+
 /**
  * Created by NCZ on 2018/7/25.
  */
-public class T_RESUME {
+public class T_RESUME implements Serializable{
     private int re_id;
     private String re_title;
-    private int re_uid;
-    private int re_name;
+    private T_User t_user;
+    private String re_name;
     private String re_sex;
     private int re_age;
     private String re_phone;
@@ -16,6 +18,23 @@ public class T_RESUME {
     private String re_school;
     private String re_skill;
     private String re_intro;
+
+    public T_RESUME(String re_title, T_User t_user, String re_name, String re_sex, int re_age, String re_phone, String re_email, String re_address, String re_school, String re_skill, String re_intro) {
+        this.re_title = re_title;
+        this.t_user = t_user;
+        this.re_name = re_name;
+        this.re_sex = re_sex;
+        this.re_age = re_age;
+        this.re_phone = re_phone;
+        this.re_email = re_email;
+        this.re_address = re_address;
+        this.re_school = re_school;
+        this.re_skill = re_skill;
+        this.re_intro = re_intro;
+    }
+
+    public T_RESUME() {
+    }
 
     public T_RESUME(int re_id) {
         this.re_id = re_id;
@@ -37,19 +56,19 @@ public class T_RESUME {
         this.re_title = re_title;
     }
 
-    public int getRe_uid() {
-        return re_uid;
+    public T_User getT_user() {
+        return t_user;
     }
 
-    public void setRe_uid(int re_uid) {
-        this.re_uid = re_uid;
+    public void setT_user(T_User t_user) {
+        this.t_user = t_user;
     }
 
-    public int getRe_name() {
+    public String getRe_name() {
         return re_name;
     }
 
-    public void setRe_name(int re_name) {
+    public void setRe_name(String re_name) {
         this.re_name = re_name;
     }
 
@@ -115,5 +134,23 @@ public class T_RESUME {
 
     public void setRe_intro(String re_intro) {
         this.re_intro = re_intro;
+    }
+
+    @Override
+    public String toString() {
+        return "T_RESUME{" +
+                "re_id=" + re_id +
+                ", re_title='" + re_title + '\'' +
+                ", t_user=" + t_user +
+                ", re_name=" + re_name +
+                ", re_sex='" + re_sex + '\'' +
+                ", re_age=" + re_age +
+                ", re_phone='" + re_phone + '\'' +
+                ", re_email='" + re_email + '\'' +
+                ", re_address='" + re_address + '\'' +
+                ", re_school='" + re_school + '\'' +
+                ", re_skill='" + re_skill + '\'' +
+                ", re_intro='" + re_intro + '\'' +
+                '}';
     }
 }

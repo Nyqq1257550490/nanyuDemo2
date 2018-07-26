@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.ResumeDao">
+    <insert id="addResume" parameterType="com.nanyu.model.T_RESUME">
+        INSERT INTO T_RESUME(RE_ID,RE_UID,RE_NAME,RE_SEX,RE_AGE,RE_PHONE,RE_EMAIL,RE_ADDRESS,RE_SCHOOL,RE_SKILL,RE_INTRO,RE_TITLE)
+        VALUES (T_RSUME_SEQ.nextval,#{t_user.u_id},#{re_name},#{re_sex},#{re_age},#{re_phone},#{re_email},#{re_address},#{re_school},#{re_skill},#{re_intro},#{re_title})
+    </insert>
+
+    <select id="getAllResume" parameterType="int" resultType="com.nanyu.model.T_RESUME">
+        SELECT * from T_RESUME where RE_UID = #{uid}
+    </select>
+    <select id="getPageResume" parameterType="int" resultType="com.nanyu.model.T_RESUME">
+        SELECT a.*
+        FROM (SELECT ROWNUM rn,r.* from T_RESUME r where RE_UID = #{uid} and #{pageSize}>=ROWNUM) a
+        where a.rn>#{startPage}
+    </select>
+
+    <update id="updateResume" parameterType="com.nanyu.model.T_RESUME">
+        UPDATE T_RESUME set RE_NAME = #{re_name},RE_SEX = #{re_sex},RE_AGE = #{re_age},RE_PHONE = #{re_phone},RE_EMAIL = #{re_email},RE_ADDRESS = #{re_address},RE_SCHOOL = #{re_school},RE_SKILL = #{re_skill},RE_INTRO = #{re_intro},RE_TITLE = #{re_title}
+        where RE_ID = #{re_id}
+    </update>
+</mapper>

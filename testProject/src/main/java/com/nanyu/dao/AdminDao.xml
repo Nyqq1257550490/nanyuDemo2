@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.AdminDao">
+    <select id="adminLogin" parameterType="com.nanyu.model.T_Admin" resultType="com.nanyu.model.T_Admin">
+        SELECT * FROM T_MANAGER WHERE M_NAME = #{m_name} and M_PASS = #{m_pass}
+    </select>
+</mapper>

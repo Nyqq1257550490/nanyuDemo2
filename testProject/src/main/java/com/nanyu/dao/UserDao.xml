@@ -5,7 +5,7 @@
 
 <mapper namespace="com.nanyu.dao.UserDao">
     <select id="getUserByNameAndPass" parameterType="com.nanyu.model.T_User" resultType="com.nanyu.model.T_User">
-        select * from T_USER WHERE u_name=#{u_name} and u_pass=#{u_pass}
+        select u.* from T_USER u WHERE u.U_NAME=#{u_name} and u.U_PASS=#{u_pass}
     </select>
 
     <select id="findUserName" parameterType="com.nanyu.model.T_User" resultType="com.nanyu.model.T_User">

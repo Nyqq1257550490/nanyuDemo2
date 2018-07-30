@@ -1,6 +1,7 @@
 package com.nanyu.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by NCZ on 2018/7/25.
@@ -9,6 +10,7 @@ public class T_User implements Serializable{
     private int u_id;
     private String u_name;
     private String u_pass;
+
 
     public int getU_id() {
         return u_id;

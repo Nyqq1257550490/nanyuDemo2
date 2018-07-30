@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.Rec_ReDao">
+    <insert id="saveNewInfo">
+        INSERT INTO T_RE_REC(RE_REC_ID,RE_REC_REID,RE_REC_RECID,RE_REC_TIME)
+        VALUES (T_RE_REC_SEQ.nextval,#{resumeId},#{rec_id},#{time})
+    </insert>
+
+    <select id="findNewRE_REC" parameterType="int" resultMap="info_re_rec">
+        SELECT rr.*,r.*,c.* FROM T_RE_REC rr,T_RESUME r,T_RECRUITMENT c
+        where RE_REC_STATUS = #{status}
+        and rr.RE_REC_REID = r.RE_ID
+        and rr.RE_REC_RECID = c.REC_ID
+    </select>
+
+    <select id="getPageRe_Rec" parameterType="int" resultMap="info_re_rec">
+        SELECT a.*
+        FROM (SELECT ROWNUM rn,rr.*,r.*,c.* FROM T_RE_REC rr,T_RESUME r,T_RECRUITMENT c
+        where RE_REC_STATUS = #{status}
+        and rr.RE_REC_REID = r.RE_ID
+        and rr.RE_REC_RECID = c.REC_ID
+        and #{pageSize}>=ROWNUM) a
+        where a.rn>#{startPage}
+    </select>
+
+    <select id="findCurrent" parameterType="int" resultMap="info_re_rec">
+      SELECT * FROM T_RE_REC WHERE RE_REC_ID = #{re_rec_id}
+    </select>
+
+    <update id="updateRE_RECForFace" parameterType="com.nanyu.model.T_RE_REC">
+        UPDATE T_RE_REC set RE_REC_STATUS = #{re_rec_status},RE_REC_FACETIME = #{re_rec_facetime}
+        where RE_REC_ID = #{re_rec_id}
+    </update>
+
+    <update id="updateRE_RECForRefuse" parameterType="com.nanyu.model.T_RE_REC">
+        UPDATE T_RE_REC set RE_REC_STATUS = #{re_rec_status}
+        where RE_REC_ID = #{re_rec_id}
+    </update>
+
+    <select id="getFeedBackRE_REC" parameterType="int" resultMap="info_re_rec">
+        SELECT rr.*,r.*,c.* FROM T_RE_REC rr,T_RESUME r,T_RECRUITMENT c
+        where r.RE_UID = #{uid}
+        and RE_REC_STATUS = 1
+        and rr.RE_REC_REID = r.RE_ID
+        and rr.RE_REC_RECID = c.REC_ID
+    </select>
+
+    <update id="changeUserStatus" parameterType="com.nanyu.model.T_RE_REC">
+      UPDATE T_RE_REC SET RE_REC_STATUS = #{re_rec_status}
+      where RE_REC_ID = #{re_rec_id}
+    </update>
+
+    <resultMap id="info_re_rec" type="com.nanyu.model.T_RE_REC">
+        <id property="re_rec_id" column="RE_REC_ID"/>
+        <result property="re_rec_time" column="RE_REC_TIME"/>
+        <result property="re_rec_facetime" column="RE_REC_FACETIME"/>
+        <result property="re_rec_intro" column="RE_REC_INTRO"/>
+        <association property="resume" javaType="com.nanyu.model.T_RESUME">
+            <id property="re_id" column="RE_ID"/>
+            <result property="re_name" column="RE_NAME"/>
+            <result property="re_sex" column="RE_SEX"/>
+            <result property="re_age" column="RE_AGE"/>
+            <result property="re_phone" column="RE_PHONE"/>
+            <result property="re_email" column="RE_EMAIL"/>
+            <result property="re_address" column="RE_ADDRESS"/>
+            <result property="re_school" column="RE_SCHOOL"/>
+            <result property="re_skill" column="RE_SKILL"/>
+            <result property="re_intro" column="RE_INTRO"/>
+            <result property="re_title" column="RE_TITLE"/>
+        </association>
+        <association property="recruitment" javaType="com.nanyu.model.T_RECRUITMENT">
+            <id property="rec_id" column="REC_ID"/>
+            <result property="rec_jobname" column="REC_JOBNAME"/>
+            <result property="rec_address" column="REC_ADDRESS"/>
+            <result property="rec_income" column="REC_INCOME"/>
+            <result property="rec_intro" column="REC_INTRO"/>
+            <result property="rec_company" column="REC_COMPANY"/>
+            <result property="rec_welfare" column="REC_WERFARE"/>
+            <result property="rec_status" column="REC_STATUS"/>
+        </association>
+    </resultMap>
+</mapper>

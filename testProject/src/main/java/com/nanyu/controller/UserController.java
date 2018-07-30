@@ -22,6 +22,7 @@ public class UserController {
     @Resource
     private ResumeService resumeService;
 
+
     /**
      * 跳转到用户登录
      * @return
@@ -50,18 +51,21 @@ public class UserController {
     @RequestMapping("/goToUserMenu")
     public String goToUserMenu(HttpSession session,HttpServletRequest request,int startPage)throws Exception{
         T_User user = (T_User) session.getAttribute("user");
+//        System.out.println(startPage);
         int uid = user.getU_id();
-        System.out.println(uid);
+//        System.out.println(uid);
         List<T_RESUME> resumeList = resumeService.getAllResume(uid);
         if(resumeList==null){
             request.setAttribute("resumeStatus","还没有任何简历");
         }else{
-            int state = 1;
             final int pageSize = 1;
             int totalRow = resumeList.size();
             int totalPage = totalRow%pageSize==0?totalRow/pageSize:(totalRow/pageSize)+1;
             session.setAttribute("resumeTotalPage",totalPage);
+            startPage -= 1;
+            System.out.println(startPage);
             List<T_RESUME> resumePageList = resumeService.getPageResume(uid,startPage,pageSize);
+            System.out.println(resumePageList);
             session.setAttribute("resumeDetail",resumePageList);
         }
         return "userpages/userMenu";

@@ -3,7 +3,7 @@
   Created by IntelliJ IDEA.
   User: NCZ
   Date: 2018/7/25
-  Time: 11:05
+  TimeTool: 11:05
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -37,6 +37,13 @@
                 </c:otherwise>
             </c:choose>
         </span>
+    </div>
+    <div style="position:absolute;width: 30%;height:900px;border-width: 2px">
+       <a href="goToRecruitmentPage?startPage=0">查看招聘信息</a>
+
+    </div>
+    <div style="width: 70%;height:900px;border-width: 2px;margin-left: 30%">
+        公司大致介绍
     </div>
 </body>
 </html>

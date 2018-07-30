@@ -13,4 +13,7 @@ public interface ResumeService {
     List<T_RESUME> getPageResume(int uid,int startPage,int pageSize);//查找用户简历 分页
 
     boolean updateResume(T_RESUME resume);//修改简历
+    boolean deleteResume(int re_id);//删除简历
+
+    T_RESUME findResume(int re_id);//通过id查找指定简历表
 }

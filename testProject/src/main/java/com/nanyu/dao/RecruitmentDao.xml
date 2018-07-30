@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.RecruitmentDao">
+    <select id="findAble" resultType="com.nanyu.model.T_RECRUITMENT">
+        select * FROM T_RECRUITMENT WHERE REC_STATUS = #{status}
+    </select>
+
+    <select id="getPageRecruitment" resultType="com.nanyu.model.T_RECRUITMENT">
+      SELECT a.*
+        FROM (SELECT ROWNUM rn,r.* from T_RECRUITMENT r where REC_STATUS = #{status} and #{pageSize}>=ROWNUM) a
+        where a.rn>#{startPage}
+    </select>
+
+    <insert id="saveNewRec" parameterType="com.nanyu.model.T_RECRUITMENT">
+        INSERT INTO T_RECRUITMENT(REC_ID,REC_JOBNAME,REC_ADDRESS,REC_INCOME,REC_INTRO,REC_COMPANY,REC_WELFARE,REC_STATUS)
+        VALUES (T_RECRUITMENT_SEQ.nextval,#{rec_jobname},#{rec_address},#{rec_income},#{rec_intro},#{rec_company},#{rec_welfare},#{rec_status})
+    </insert>
+
+    <select id="findRecruitment" resultType="com.nanyu.model.T_RECRUITMENT">
+        SELECT * FROM T_RECRUITMENT WHERE REC_STATUS = #{status}
+    </select>
+</mapper>

@@ -11,6 +11,7 @@
     <select id="getAllResume" parameterType="int" resultType="com.nanyu.model.T_RESUME">
         SELECT * from T_RESUME where RE_UID = #{uid}
     </select>
+
     <select id="getPageResume" parameterType="int" resultType="com.nanyu.model.T_RESUME">
         SELECT a.*
         FROM (SELECT ROWNUM rn,r.* from T_RESUME r where RE_UID = #{uid} and #{pageSize}>=ROWNUM) a
@@ -21,4 +22,12 @@
         UPDATE T_RESUME set RE_NAME = #{re_name},RE_SEX = #{re_sex},RE_AGE = #{re_age},RE_PHONE = #{re_phone},RE_EMAIL = #{re_email},RE_ADDRESS = #{re_address},RE_SCHOOL = #{re_school},RE_SKILL = #{re_skill},RE_INTRO = #{re_intro},RE_TITLE = #{re_title}
         where RE_ID = #{re_id}
     </update>
+
+    <delete id="deleteResume" parameterType="int">
+        DELETE FROM T_RESUME WHERE RE_ID = #{re_id}
+    </delete>
+
+    <select id="findResume" parameterType="int" resultType="com.nanyu.model.T_RESUME">
+        SELECT * FROM T_RESUME WHERE RE_ID = #{re_id}
+    </select>
 </mapper>

@@ -60,4 +60,24 @@ public class ResumeServiceImpl implements ResumeService{
     public boolean updateResume(T_RESUME resume) {
         return resumeDao.updateResume(resume);
     }
+
+    /**
+     * 删除简历
+     * @param re_id
+     * @return
+     */
+    @Override
+    public boolean deleteResume(int re_id) {
+        return resumeDao.deleteResume(re_id);
+    }
+
+    /**
+     * 通过id查找指定简历表
+     * @param re_id
+     * @return
+     */
+    @Override
+    public T_RESUME findResume(int re_id) {
+        return resumeDao.findResume(re_id);
+    }
 }

@@ -104,13 +104,13 @@
                 <tr>
                     <td>请分配职位：</td>
                     <td>
-                        <select id="department">
+                        <select id="department" name="dep_id">
                             <option>请选择部门</option>
                             <c:forEach items="${sessionScope.departments}" var="i">
                                 <option value="${i.dep_id}" id="depart">${i.dep_name}</option>
                             </c:forEach>
                         </select>
-                        <select id="position"></select>
+                        <select id="position" name="pos_id"></select>
                     </td>
                 </tr>
                 <tr>

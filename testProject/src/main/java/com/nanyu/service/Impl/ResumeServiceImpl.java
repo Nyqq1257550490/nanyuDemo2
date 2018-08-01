@@ -48,7 +48,10 @@ public class ResumeServiceImpl implements ResumeService{
      */
     @Override
     public List<T_RESUME> getPageResume(int uid, int startPage, int pageSize) {
-        return resumeDao.getPageResume(uid,startPage,pageSize);
+        int start = startPage*pageSize;
+        int end = (startPage+1)*pageSize;
+
+        return resumeDao.getPageResume(uid,start,end);
     }
 
     /**

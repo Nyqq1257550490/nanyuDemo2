@@ -1,8 +1,10 @@
 package com.nanyu.controller;
 
 import com.nanyu.model.T_Department;
+import com.nanyu.model.T_Employee;
 import com.nanyu.model.T_Position;
 import com.nanyu.service.Dep_PosService;
+import com.nanyu.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +20,8 @@ import java.util.List;
 public class Dep_PosController {
     @Resource
     private Dep_PosService dep_posService;
+    @Resource
+    private EmployeeService employeeService;
 
     /**
      * 跳转部门职位控制界面，查找所有部门
@@ -113,6 +117,26 @@ public class Dep_PosController {
         position.setDepartment(d);
         dep_posService.addNewPos(position);
         return "redirect:/checkPosInDep?dep_id=dep_id";
+    }
+
+    /**
+     * 判断职位下是否有所属员工
+     * @param pos_id
+     * @param session
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/checkPosEmpty")
+    @ResponseBody
+    public Object checkPosEmpty(int pos_id,HttpSession session)throws Exception{
+        int dep_id = (int) session.getAttribute("currentDep_ID");
+        List<T_Employee> employees = employeeService.findPosEmpty(dep_id,pos_id);
+        if(employees.size()==0){
+            dep_posService.deletePos(pos_id);
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

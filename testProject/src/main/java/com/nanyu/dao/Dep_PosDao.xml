@@ -17,6 +17,10 @@
         VALUES (T_POSITION_SEQ.nextval,#{pos_name},#{pos_income},#{department.dep_id})
     </insert>
 
+    <delete id="deletePos" parameterType="int">
+        DELETE FROM T_POSITION WHERE POS_ID=#{0}
+    </delete>
+
     <select id="findCurrentPos" parameterType="int" resultMap="pos_dep">
         SELECT * FROM T_POSITION p,T_DEPARTMENT d
         where p.POS_DEP_ID=d.DEP_ID

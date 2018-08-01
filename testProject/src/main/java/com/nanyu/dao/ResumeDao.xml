@@ -14,8 +14,8 @@
 
     <select id="getPageResume" parameterType="int" resultType="com.nanyu.model.T_RESUME">
         SELECT a.*
-        FROM (SELECT ROWNUM rn,r.* from T_RESUME r where RE_UID = #{uid} and #{pageSize}>=ROWNUM) a
-        where a.rn>#{startPage}
+        FROM (SELECT ROWNUM rn,r.* from T_RESUME r where RE_UID = #{uid} and #{end}>=ROWNUM) a
+        where a.rn>#{start}
     </select>
 
     <update id="updateResume" parameterType="com.nanyu.model.T_RESUME">

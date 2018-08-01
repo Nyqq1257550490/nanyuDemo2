@@ -24,7 +24,7 @@ int totalPages= (int) session.getAttribute("resumeTotalPage");
         <span>用户管理</span>
         <span style="float: right"><a href="goMainPage">返回</a></span>
         <span style="float: right">/</span>
-        <span style="float: right"><a href="goToUserMenu">${sessionScope.user.u_name}</a></span>
+        <span style="float: right"><a href="goToUserMenu?startPage=1">${sessionScope.user.u_name}</a></span>
     </div>
     <div style="position:absolute;width: 30%;height:900px;border-width: 2px">
         <div>

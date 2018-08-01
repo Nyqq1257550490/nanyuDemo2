@@ -54,6 +54,16 @@ public class Dep_PosServiceImpl implements Dep_PosService{
     }
 
     /**
+     * 删除职位
+     * @param pos_id
+     * @return
+     */
+    @Override
+    public boolean deletePos(int pos_id) {
+        return dep_posDao.deletePos(pos_id);
+    }
+
+    /**
      * 查找指定部门下所有职位
      * @param dep_id
      * @return

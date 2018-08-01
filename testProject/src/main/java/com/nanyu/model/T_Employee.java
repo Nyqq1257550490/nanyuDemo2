@@ -11,9 +11,9 @@ public class T_Employee {
     private int emp_age;
     private String emp_sex;
     private String emp_hiredate;
-    private int emp_dep_id;
-    private int emp_pos_id;
-    private int emp_status = 1;//默认到岗
+    private T_Department department;
+    private T_Position position;
+    private int emp_status = 1;//1在职 2 请假 0离职
     private String emp_company;
     private String emp_phone;
     private String emp_email;
@@ -77,20 +77,20 @@ public class T_Employee {
         this.emp_hiredate = emp_hiredate;
     }
 
-    public int getEmp_dep_id() {
-        return emp_dep_id;
+    public T_Department getDepartment() {
+        return department;
     }
 
-    public void setEmp_dep_id(int emp_dep_id) {
-        this.emp_dep_id = emp_dep_id;
+    public void setDepartment(T_Department department) {
+        this.department = department;
     }
 
-    public int getEmp_pos_id() {
-        return emp_pos_id;
+    public T_Position getPosition() {
+        return position;
     }
 
-    public void setEmp_pos_id(int emp_pos_id) {
-        this.emp_pos_id = emp_pos_id;
+    public void setPosition(T_Position position) {
+        this.position = position;
     }
 
     public int getEmp_status() {

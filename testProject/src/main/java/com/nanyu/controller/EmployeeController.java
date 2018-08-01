@@ -1,11 +1,16 @@
 package com.nanyu.controller;
 
+import com.nanyu.model.T_Department;
 import com.nanyu.model.T_Employee;
+import com.nanyu.model.T_Position;
 import com.nanyu.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by NCZ on 2018/7/30.
@@ -22,9 +27,54 @@ public class EmployeeController {
      * @throws Exception
      */
     @RequestMapping("/saveNewEmployee")
-    public String saveNewEmployee(T_Employee employee)throws Exception{
+    public String saveNewEmployee(T_Employee employee,int dep_id,int pos_id)throws Exception{
+        T_Department department = new T_Department();
+        department.setDep_id(dep_id);
+        T_Position position = new T_Position();
+        position.setPos_id(pos_id);
+        employee.setDepartment(department);
+        employee.setPosition(position);
         employeeService.saveNewEmployee(employee);
         return "adminpages/adminMenu";
+    }
+
+    /**
+     * 查看在职员工
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/findEmployeeIn")
+    @ResponseBody
+    public void findEmployeeIn(HttpSession session)throws Exception{
+        int state = 1;
+        List<T_Employee> employees = employeeService.findEmployeeState(state);
+        session.setAttribute("findEmployee",employees);
+    }
+
+    /**
+     * 查看离职员工
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/findEmployeeOut")
+    @ResponseBody
+    public void findEmployeeOut(HttpSession session)throws Exception{
+        int state = 0;
+        List<T_Employee> employees = employeeService.findEmployeeState(state);
+        session.setAttribute("findEmployee",employees);
+    }
+
+    /**
+     * 查看请假员工
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/findEmployeeHoliday")
+    @ResponseBody
+    public void findEmployeeHoliday(HttpSession session)throws Exception{
+        int state = 2;
+        List<T_Employee> employees = employeeService.findEmployeeState(state);
+        session.setAttribute("findEmployee",employees);
     }
 
 

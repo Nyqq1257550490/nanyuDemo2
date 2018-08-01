@@ -49,7 +49,15 @@ public class AdminController {
         }
     }
 
-
+    /**
+     * 跳转查找员工界面
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/goToEmployeeFinder")
+    public String goToEmployeeFinder()throws Exception{
+        return "adminpages/adminFindEmployee";
+    }
 
 
 }

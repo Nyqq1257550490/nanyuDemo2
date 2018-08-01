@@ -5,8 +5,44 @@
 <mapper namespace="com.nanyu.dao.EmployeeDao">
     <insert id="saveNewEmployee" parameterType="com.nanyu.model.T_Employee">
         INSERT INTO T_EMPLOYEE(EMP_ID,EMP_CODE,EMP_PASS,EMP_NAME,EMP_AGE,EMP_SEX,EMP_HIREDATE,EMP_DEP_ID,EMP_POS_ID,EMP_STATUS,EMP_COMPANY,EMP_PHONE,EMP_EMAIL)
-        VALUES (T_EMPLOYEE_SEQ.nextval,#{emp_code},#{emp_pass},#{emp_name},#{emp_age},#{emp_sex},#{emp_hiredate},#{emp_dep_id},#{emp_pos_id},#{emp_status},#{emp_company},#{emp_phone},#{emp_email})
+        VALUES (T_EMPLOYEE_SEQ.nextval,#{emp_code},#{emp_pass},#{emp_name},#{emp_age},#{emp_sex},#{emp_hiredate},#{department.dep_id},#{position.pos_id},#{emp_status},#{emp_company},#{emp_phone},#{emp_email})
     </insert>
 
+    <select id="findPosEmpty" parameterType="int" resultType="com.nanyu.model.T_Employee">
+        select * from T_EMPLOYEE
+        WHERE EMP_DEP_ID = #{0}
+        and EMP_POS_ID = #{1}
+    </select>
+
+    <select id="findEmployeeState" parameterType="int" resultMap="findEmployee">
+        SELECT e.*,d.*,p.* FROM T_EMPLOYEE e,T_DEPARTMENT d,T_POSITION p
+        where e.EMP_DEP_ID = d.DEP_ID
+        and e.EMP_POS_ID = p.POS_ID
+        and e.EMP_STATUS = #{state}
+    </select>
+
+    <resultMap id="findEmployee" type="com.nanyu.model.T_Employee">
+        <id property="emp_id" column="EMP_ID"/>
+        <result property="emp_code" column="EMP_CODE"/>
+        <result property="emp_pass" column="EMP_PASS"/>
+        <result property="emp_name" column="EMP_NAME"/>
+        <result property="emp_age" column="EMP_AGE"/>
+        <result property="emp_sex" column="EMP_SEX"/>
+        <result property="emp_hiredate" column="EMP_HIREDATE"/>
+        <result property="emp_status" column="EMP_STATUS"/>
+        <result property="emp_company" column="EMP_COMPANY"/>
+        <result property="emp_phone" column="EMP_PHONE"/>
+        <result property="emp_email" column="EMP_EMAIL"/>
+        <association property="department" javaType="com.nanyu.model.T_Department">
+            <id property="dep_id" column="DEP_ID"/>
+            <result property="dep_name" column="DEP_NAME"/>
+            <result property="dep_createtime" column="DEP_CREATETIME"/>
+        </association>
+        <association property="position" javaType="com.nanyu.model.T_Position">
+            <id property="pos_id" column="POS_ID"/>
+            <result property="pos_name" column="POS_NAME"/>
+            <result property="pos_income" column="POS_INCOME"/>
+        </association>
+    </resultMap>
 
 </mapper>

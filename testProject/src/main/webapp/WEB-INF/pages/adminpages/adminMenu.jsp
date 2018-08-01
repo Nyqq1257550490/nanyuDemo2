@@ -41,6 +41,9 @@
         <div>
             <a href="#">部门/职位操作</a>
         </div>
+        <div>
+            <a href="goToEmployeeFinder">员工查询</a>
+        </div>
     </div>
     <div style="width: 70%;height:900px;border-width: 2px;margin-left: 30%">
         <span>今天也要努力工作！！</span>

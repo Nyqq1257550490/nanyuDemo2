@@ -66,6 +66,23 @@
                     return false;
                 }
             })
+
+            $("#deletePos").click(function () {
+                var posId = $("this").sibling(":eq(0)").val()
+                $.ajax({
+                    url:"checkPosEmpty",
+                    data:{"pos_id":posId},
+                    type:"post",
+                    success:function (obj) {
+                        if(obj==true){
+                            location.reload();
+                        }else{
+                            $("#s1").html("不能删除");
+                        }
+                    }
+
+                })
+            })
         })
     </script>
 </head>
@@ -102,6 +119,11 @@
                 <tr>
                     <td>${i.pos_name}</td>
                     <td><a href="#?pos_id=${i.pos_id}"><input type="button" value="查看所属员工"></a></td>
+                    <td>
+                        <input type="button" value="删除职位" id="deletePos">
+                        <input type="hidden" value="${i.pos_id}" name="pos_id">
+                        <span id="s1"></span>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

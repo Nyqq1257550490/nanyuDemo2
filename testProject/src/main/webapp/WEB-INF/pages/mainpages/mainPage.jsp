@@ -29,7 +29,7 @@
                 <c:when test="${sessionScope.user!=null}">
                     <form action="goToUserMenu" method="get">
                         <input type="submit" name="viewUserMenu" value="${sessionScope.user.u_name}">
-                        <input type="hidden" name="startPage" value="0">
+                        <input type="hidden" name="startPage" value="1">
                     </form>
                 </c:when>
                 <c:otherwise>

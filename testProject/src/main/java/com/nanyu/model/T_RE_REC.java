@@ -11,10 +11,15 @@ public class T_RE_REC implements Serializable{
     private T_RECRUITMENT recruitment;
     private String re_rec_time;
     private String re_rec_facetime;
-    private int re_rec_status = 0;//0管理员未回复 1管理员已回复，等待用户确认面试 2管理员拒绝 3用户确认面试 4被用户拒绝
+    private int re_rec_status = 0;//0管理员未回复 1管理员已回复，等待用户确认面试 2管理员拒绝 3用户确认面试 4被用户拒绝 5面试通过 6面试不通过
     private String re_rec_intro;//额外消息显示
 
     public T_RE_REC() {
+    }
+
+    public T_RE_REC(int re_rec_id, int re_rec_status) {
+        this.re_rec_id = re_rec_id;
+        this.re_rec_status = re_rec_status;
     }
 
     public int getRe_rec_id() {

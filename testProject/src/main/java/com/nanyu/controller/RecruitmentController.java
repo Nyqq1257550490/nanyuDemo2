@@ -1,9 +1,7 @@
 package com.nanyu.controller;
 
-import com.nanyu.model.T_RECRUITMENT;
-import com.nanyu.model.T_RESUME;
-import com.nanyu.model.T_RE_REC;
-import com.nanyu.model.T_User;
+import com.nanyu.model.*;
+import com.nanyu.service.MainService;
 import com.nanyu.service.Rec_ReService;
 import com.nanyu.service.RecruitmentService;
 import com.nanyu.tools.TimeTool;
@@ -21,6 +19,8 @@ import java.util.List;
  */
 @Controller
 public class RecruitmentController {
+    @Resource
+    private MainService mainService;
     @Resource
     private RecruitmentService recruitmentService;
     @Resource
@@ -143,7 +143,7 @@ public class RecruitmentController {
     public String userAnswerFace(int changeStatus,HttpSession session)throws Exception{
         T_RE_REC re_rec = (T_RE_REC) session.getAttribute("feedBackRE_REC");
         re_rec.setRe_rec_status(changeStatus);
-        rec_reService.changeUserStatus(re_rec);
+        rec_reService.changeRE_RECStatus(re_rec);
         return "redirect:/checkSelfRE_REC";
     }
 
@@ -166,8 +166,67 @@ public class RecruitmentController {
      * @throws Exception
      */
     @RequestMapping("/goUpDownRecruitment")
-    public String goUpDownRecruitment()throws Exception{
+    public String goUpDownRecruitment(HttpSession session)throws Exception{
         int status = 1;
         List<T_RECRUITMENT> recruitmentList = recruitmentService.findRecruitment(status);
+        session.setAttribute("recruitmentView",recruitmentList);
+        return "adminpages/adminUpDownRecruitment";
     }
+
+    /**
+     * 修改招聘信息
+     * @param recruitment
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/modifyRecruitment")
+    public String modifyRecruitment(T_RECRUITMENT recruitment)throws Exception{
+        recruitmentService.modifyRecruitment(recruitment);
+        return "redirect:/goUpDownRecruitment";
+    }
+
+    /**
+     * 查看等待面试结果的信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/inRollFaceTest")
+    public String inRollFaceTest(HttpSession session)throws Exception{
+        int status = 3;
+        List<T_RE_REC> re_recList = rec_reService.findNewRE_REC(status);
+        session.setAttribute("re_recForFace",re_recList);
+        return "adminpages/adminInRollFace";
+    }
+
+    /**
+     * 面试遭拒绝
+     * @param re_rec_id
+     * @param status
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/changeRE_RECStatus")
+    public String changeRE_RECStatus(int re_rec_id,int status)throws Exception{
+        T_RE_REC re_rec = new T_RE_REC(re_rec_id,status);
+        rec_reService.changeRE_RECStatus(re_rec);
+        return "redirect:/inRollFaceTest";
+    }
+
+    /**
+     * 直接跳转录用员工界面
+     * @param session
+     * @param fromNum
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/CreateEmployee")//fromNum = 0面试——录用，1直接录用
+    public String createEmployee(HttpSession session,int fromNum,int re_rec_id)throws Exception{
+        session.setAttribute("fromNum",fromNum);
+        T_RE_REC re_rec = rec_reService.findCurrent(re_rec_id);
+        session.setAttribute("inRollRe_Rec",re_rec);
+        List<T_Department> departments = mainService.findAllDepartment();
+        session.setAttribute("departments",departments);
+        return "adminpages/adminAddEmployee";
+    }
+
 }

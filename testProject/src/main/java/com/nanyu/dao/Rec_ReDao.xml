@@ -47,10 +47,12 @@
         and rr.RE_REC_RECID = c.REC_ID
     </select>
 
-    <update id="changeUserStatus" parameterType="com.nanyu.model.T_RE_REC">
+    <update id="changeRE_RECStatus" parameterType="com.nanyu.model.T_RE_REC">
       UPDATE T_RE_REC SET RE_REC_STATUS = #{re_rec_status}
       where RE_REC_ID = #{re_rec_id}
     </update>
+
+
 
     <resultMap id="info_re_rec" type="com.nanyu.model.T_RE_REC">
         <id property="re_rec_id" column="RE_REC_ID"/>

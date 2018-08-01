@@ -18,5 +18,7 @@ public interface Rec_ReDao {
     boolean updateRE_RECForRefuse(T_RE_REC t_re_rec);//拒绝简历—招聘信息
 
     List<T_RE_REC> getFeedBackRE_REC(@Param("uid") int uid);//用户查看自己投递的反馈
-    boolean changeUserStatus(T_RE_REC re_rec);//用户反馈面试邀请，3同意，4拒绝
+    boolean changeRE_RECStatus(T_RE_REC re_rec);//用户反馈面试邀请，3同意，4拒绝 5面试通过 6面试不通过
+
+
 }

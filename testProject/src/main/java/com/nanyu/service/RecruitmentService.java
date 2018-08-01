@@ -1,6 +1,7 @@
 package com.nanyu.service;
 
 import com.nanyu.model.T_RECRUITMENT;
+import com.nanyu.model.T_RE_REC;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface RecruitmentService {
     boolean saveNewRec(T_RECRUITMENT recruitment);//制作新的招聘信息（未上架）
 
     List<T_RECRUITMENT> findRecruitment(int status);//查找指定状态的招聘信息
+    boolean modifyRecruitment(T_RECRUITMENT recruitment);//修改招聘信息
+
+
 }

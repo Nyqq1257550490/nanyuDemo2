@@ -59,4 +59,14 @@ public class RecruitmentServiceImpl implements RecruitmentService{
     public List<T_RECRUITMENT> findRecruitment(int status) {
         return recruitmentDao.findRecruitment(status);
     }
+
+    /**
+     * 修改招聘信息
+     * @param recruitment
+     * @return
+     */
+    @Override
+    public boolean modifyRecruitment(T_RECRUITMENT recruitment) {
+        return recruitmentDao.modifyRecruitment(recruitment);
+    }
 }

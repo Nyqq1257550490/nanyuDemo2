@@ -21,4 +21,9 @@
     <select id="findRecruitment" resultType="com.nanyu.model.T_RECRUITMENT">
         SELECT * FROM T_RECRUITMENT WHERE REC_STATUS = #{status}
     </select>
+
+    <update id="modifyRecruitment" parameterType="com.nanyu.model.T_RECRUITMENT">
+        UPDATE T_RECRUITMENT SET REC_JOBNAME = #{rec_jobname},REC_ADDRESS = #{rec_address},
+        REC_INCOME = #{rec_income},REC_INTRO = #{rec_intro},REC_COMPANY = #{rec_company},REC_WELFARE = #{rec_welfare}
+    </update>
 </mapper>

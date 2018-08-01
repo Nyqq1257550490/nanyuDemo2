@@ -3,5 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nanyu.dao.MainDao">
+    <select id="findAllDepartment" resultType="com.nanyu.model.T_Department">
+        SELECT * FROM T_DEPARTMENT
+    </select>
+
+    <select id="getPosition" parameterType="int" resultType="com.nanyu.model.T_Position">
+        SELECT * FROM T_POSITION WHERE POS_DEP_ID = #{dep_id}
+    </select>
 
 </mapper>

@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: NCZ
-  Date: 2018/7/28
-  Time: 15:56
+  Date: 2018/7/30
+  Time: 13:34
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -38,12 +39,23 @@
         <div>
             <a href="#">发布/下架招聘信息</a>
         </div>
-        <div>
-            <a href="#">部门/职位操作</a>
-        </div>
     </div>
     <div style="width: 70%;height:900px;border-width: 2px;margin-left: 30%">
-        <span>今天也要努力工作！！</span>
+        <span>等待处理的面试：</span>
+        <c:forEach items="${sessionScope.re_recForFace}" var="i">
+            <table>
+                <tr>
+                    <td>姓名：</td>
+                    <td>${i.resume.re_name}</td>
+                    <td>求职岗位：</td>
+                    <td>${i.recruitment.rec_jobname}</td>
+                </tr>
+                <tr>
+                    <td><a href="CreateEmployee?fromNum=0&re_rec_id=${i.re_rec_id}"><input type="button">录用并导入简历</a></td>
+                    <td><a href="changeRE_RECStatus?re_rec_id=${i.re_rec_id}&status=6"><input type="button">拒绝</a></td>
+                </tr>
+            </table>
+        </c:forEach>
     </div>
 </body>
 </html>

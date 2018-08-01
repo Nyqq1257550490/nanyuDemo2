@@ -88,7 +88,9 @@ public class Rec_ReServiceImpl implements Rec_ReService{
      * @return
      */
     @Override
-    public boolean changeUserStatus(T_RE_REC re_rec) {
-        return rec_reDao.changeUserStatus(re_rec);
+    public boolean changeRE_RECStatus(T_RE_REC re_rec) {
+        return rec_reDao.changeRE_RECStatus(re_rec);
     }
+
+
 }

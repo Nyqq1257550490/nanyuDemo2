@@ -15,4 +15,6 @@ public interface RecruitmentDao {
     boolean saveNewRec(T_RECRUITMENT recruitment);//制作新的招聘信息（未上架）
 
     List<T_RECRUITMENT> findRecruitment(@Param("status") int status);//查找指定状态的招聘信息
+    boolean modifyRecruitment(T_RECRUITMENT recruitment);//修改招聘信息
+
 }

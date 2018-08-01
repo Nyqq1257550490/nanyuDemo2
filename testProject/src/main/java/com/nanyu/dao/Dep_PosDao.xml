@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.Dep_PosDao">
+    <select id="findAllDep" resultType="com.nanyu.model.T_Department">
+        SELECT * FROM T_DEPARTMENT
+    </select>
+
+    <insert id="addNewDep" parameterType="com.nanyu.model.T_Department">
+        INSERT INTO T_DEPARTMENT(DEP_ID,DEP_NAME,DEP_CREATETIME)
+        VALUES (T_DEPARTMENT_SEQ.nextval,#{dep_name},#{dep_createtime})
+    </insert>
+
+    <insert id="addNewPos" parameterType="com.nanyu.model.T_Position">
+        INSERT INTO T_POSITION(POS_ID, POS_NAME, POS_INCOME, POS_DEP_ID)
+        VALUES (T_POSITION_SEQ.nextval,#{pos_name},#{pos_income},#{department.dep_id})
+    </insert>
+
+    <select id="findCurrentPos" parameterType="int" resultMap="pos_dep">
+        SELECT * FROM T_POSITION p,T_DEPARTMENT d
+        where p.POS_DEP_ID=d.DEP_ID
+        and p.POS_DEP_ID = #{dep_id}
+    </select>
+
+    <resultMap id="pos_dep" type="com.nanyu.model.T_Position">
+        <id property="pos_id" column="POS_ID"/>
+        <result property="pos_name" column="POS_NAME"/>
+        <result property="pos_income" column="POS_INCOME"/>
+        <association property="department" javaType="com.nanyu.model.T_Department">
+            <id property="dep_id" column="DEP_ID"/>
+            <result property="dep_name" column="DEP_NAME"/>
+            <result property="dep_createtime" column="DEP_CREATETIME"/>
+        </association>
+    </resultMap>
+</mapper>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -19,6 +20,16 @@ import java.util.List;
 public class EmployeeController {
     @Resource
     private EmployeeService employeeService;
+
+    /**
+     * 跳转到员工登录
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/goEmployeeLoginPage")
+    public String goEmployeeLoginPage()throws Exception{
+        return "employeepages/employeeLogin";
+    }
 
     /**
      * 添加新员工，返回管理员主界面
@@ -76,6 +87,39 @@ public class EmployeeController {
         List<T_Employee> employees = employeeService.findEmployeeState(state);
         session.setAttribute("findEmployee",employees);
     }
+
+    /**
+     * 员工登录
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/employeeLogin")
+    public String employeeLogin(T_Employee employee, HttpServletRequest request,HttpSession session)throws Exception{
+        T_Employee employee1 = employeeService.employeeLogin(employee);
+        if(employee1.getEmp_id()!=0){
+            session.setAttribute("employee",employee1);
+            return "employeepages/employeepages";
+        }else{
+            request.setAttribute("employeeLoginStatus","用户名或密码错");
+            return "employeepages/employeeLogin";
+        }
+
+    }
+
+    /**
+     * 跳转员工考勤打卡界面
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/goEmpClockIn")
+    public String goEmpClockIn()throws Exception{
+
+        return "employeepages/employeeDesert";
+    }
+
+
+
+
 
 
 }

@@ -39,8 +39,6 @@ int totalPages= (int) session.getAttribute("resumeTotalPage");
     </div>
     <div style="width: 70%;height:900px;border-width: 2px;margin-left: 30%">
         <c:forEach items="${sessionScope.resumeDetail}" var="i">
-
-
         <table>
             <tr>
                 <td colspan="2">姓名：</td>

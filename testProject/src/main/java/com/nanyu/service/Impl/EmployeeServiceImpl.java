@@ -63,4 +63,14 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<T_Employee> findDepEmployee(int dep_id) {
         return employeeDao.findDepEmployee(dep_id);
     }
+
+    /**
+     * 员工登录
+     * @param employee
+     * @return
+     */
+    @Override
+    public T_Employee employeeLogin(T_Employee employee) {
+        return employeeDao.employeeLogin(employee);
+    }
 }

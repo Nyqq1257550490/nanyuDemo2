@@ -26,6 +26,11 @@
         WHERE EMP_DEP_ID = #{0}
     </select>
 
+    <select id="employeeLogin" parameterType="com.nanyu.model.T_Employee" resultType="com.nanyu.model.T_Employee">
+        SELECT * FROM T_EMPLOYEE WHERE EMP_CODE=#{emp_code} and EMP_PASS = #{emp_pass}
+        and EMP_STATUS > -1
+    </select>
+
     <resultMap id="findEmployee" type="com.nanyu.model.T_Employee">
         <id property="emp_id" column="EMP_ID"/>
         <result property="emp_code" column="EMP_CODE"/>

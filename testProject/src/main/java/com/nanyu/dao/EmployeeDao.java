@@ -16,6 +16,8 @@ public interface EmployeeDao {
 
     List<T_Employee> findDepEmployee(int dep_id);//查找指定部门的员工
 
+    T_Employee employeeLogin(T_Employee employee);//员工登录
+
 
 
 

@@ -50,6 +50,7 @@
     <update id="changeRE_RECStatus" parameterType="com.nanyu.model.T_RE_REC">
       UPDATE T_RE_REC SET RE_REC_STATUS = #{re_rec_status}
       where RE_REC_ID = #{re_rec_id}
+
     </update>
 
 

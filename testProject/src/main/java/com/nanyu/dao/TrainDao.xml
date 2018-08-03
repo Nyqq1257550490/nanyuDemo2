@@ -24,4 +24,33 @@
         INSERT INTO T_TR_EMP(TR_EMP_ID, TR_ID, EMP_ID) VALUES(T_TR_EMP_SEQ.nextval,#{tr_id},#{emp_id})
     </insert>
 
+    <update id="controlTrainStatus" parameterType="com.nanyu.model.T_TRAIN">
+        UPDATE T_TRAIN SET T_STATE = #{t_state},T_ISSUETIME = #{t_issuetime}
+        where T_ID = #{t_id}
+    </update>
+
+    <select id="findCurrentTrainById" parameterType="int" resultType="com.nanyu.model.T_TRAIN">
+        SELECT * FROM T_TRAIN WHERE T_ID = #{t_id}
+    </select>
+
+    <select id="findEmpTrain" parameterType="int" resultMap="findEmpTrain">
+        SELECT te.*,t.* FROM T_TR_EMP te,T_TRAIN t
+        WHERE te.TR_ID = t.T_ID
+        AND te.EMP_ID = #{emp_id}
+        and t.EMP_STATE = 1
+    </select>
+
+    <resultMap id="findEmpTrain" type="com.nanyu.model.T_TR_EMP">
+        <id property="tr_emp_id" column="TR_EMP_ID"/>
+        <association property="train" javaType="com.nanyu.model.T_TRAIN">
+            <id property="t_id" column="T_ID"/>
+            <result property="t_title" column="T_TITLE"/>
+            <result property="t_content" column="T_CONTENT"/>
+            <result property="t_starttime" column="T_STARTTIME"/>
+            <result property="t_endtime" column="T_ENDTIME"/>
+            <result property="t_issuetime" column="T_ISSUETIME"/>
+            <result property="t_address" column="T_ADDRESS"/>
+            <result property="t_state" column="T_STATE"/>
+        </association>
+    </resultMap>
 </mapper>

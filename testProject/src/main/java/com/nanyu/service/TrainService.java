@@ -2,6 +2,7 @@ package com.nanyu.service;
 
 import com.nanyu.model.T_Employee;
 import com.nanyu.model.T_TRAIN;
+import com.nanyu.model.T_TR_EMP;
 
 import java.util.List;
 
@@ -16,7 +17,10 @@ public interface TrainService {
 
     boolean addTrain_Emp(T_TRAIN train, T_Employee employee);//添加员工培训中间表
 
+    boolean controlTrainStatus(T_TRAIN train);//修改培训信息状态
+    T_TRAIN findCurrentTrainById(int t_id);//查找特定的培训信息
 
+    List<T_TR_EMP> findEmpTrain(int emp_id);//查看指定员工的所有培训信息
 
 
 

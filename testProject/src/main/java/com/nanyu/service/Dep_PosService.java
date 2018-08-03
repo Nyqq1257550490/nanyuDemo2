@@ -16,4 +16,5 @@ public interface Dep_PosService {
 
     List<T_Position> findCurrentPos(int dep_id);//查找指定部门下所有职位
 
+
 }

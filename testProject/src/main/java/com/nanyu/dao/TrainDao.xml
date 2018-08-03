@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.TrainDao">
+    <select id="findAllTrain" resultType="com.nanyu.model.T_TRAIN">
+        SELECT * FROM T_TRAIN ORDER BY T_ID DESC
+    </select>
+
+    <select id="findStateTrain" parameterType="int" resultType="com.nanyu.model.T_TRAIN">
+        SELECT * FROM T_TRAIN WHERE T_STATE = #{state}
+        order by T_ID desc
+    </select>
+
+    <insert id="saveNewTrain" parameterType="com.nanyu.model.T_TRAIN">
+        <selectKey keyProperty="t_id" resultType="int" order="BEFORE">
+            SELECT T_TRAIN_SEQ.nextval FROM dual
+        </selectKey>
+        INSERT INTO T_TRAIN(T_ID, T_TITLE, T_CONTENT, T_STARTTIME, T_ENDTIME,T_ADDRESS, T_STATE)
+        VALUES (#{t_id},#{t_title},#{t_content},#{t_starttime},#{t_endtime},#{t_address},#{t_state})
+    </insert>
+
+    <insert id="addTrain_Emp" parameterType="int">
+        INSERT INTO T_TR_EMP(TR_EMP_ID, TR_ID, EMP_ID) VALUES(T_TR_EMP_SEQ.nextval,#{tr_id},#{emp_id})
+    </insert>
+
+</mapper>

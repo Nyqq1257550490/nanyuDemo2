@@ -1,8 +1,9 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: NCZ
-  Date: 2018/7/28
-  Time: 15:56
+  Date: 2018/8/2
+  Time: 14:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -14,6 +15,10 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <script src="js/jquery.js"/>
+    <script>
+
+    </script>
 </head>
 <body>
     <div style="height: 35px">
@@ -49,7 +54,41 @@
         </div>
     </div>
     <div style="width: 70%;height:900px;border-width: 2px;margin-left: 30%">
-        <span>今天也要努力工作！！</span>
+        <h3>建立新的培训</h3>
+        <form action="#">
+            <table>
+                <tr>
+                    <td>培训主题：</td>
+                    <td><input name="t_title"></td>
+                </tr>
+                <tr>
+                    <td>培训内容</td>
+                    <td><input type="text" name="t_content"></td>
+                </tr>
+                <tr>
+                    <td>开始时间</td>
+                    <td><input type="date" name="t_starttime"></td>
+                    <td>结束时间</td>
+                    <td><input type="date" name="t_endtime"></td>
+                </tr>
+                <tr>
+                    <td>培训地点</td>
+                    <td><input name="t_address"></td>
+                </tr>
+                <tr>
+                    <td>选择对象</td>
+                    <td>
+                        <select name="selectTarget">
+                            <option value="0">实习生</option>
+                            <c:forEach items="${sessionScope.allDep}" var="i">
+                                <option value="${i.dep_id}">${i.dep_name}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="提交">
+        </form>
     </div>
 </body>
 </html>

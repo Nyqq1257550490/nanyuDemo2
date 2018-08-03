@@ -53,4 +53,14 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<T_Employee> findEmployeeState(int state) {
         return employeeDao.findEmployeeState(state);
     }
+
+    /**
+     * 查找指定部门的员工
+     * @param dep_id
+     * @return
+     */
+    @Override
+    public List<T_Employee> findDepEmployee(int dep_id) {
+        return employeeDao.findDepEmployee(dep_id);
+    }
 }

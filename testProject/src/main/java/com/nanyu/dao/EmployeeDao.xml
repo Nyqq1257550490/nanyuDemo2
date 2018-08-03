@@ -21,6 +21,11 @@
         and e.EMP_STATUS = #{state}
     </select>
 
+    <select id="findDepEmployee" parameterType="int" resultType="com.nanyu.model.T_Employee">
+        select * from T_EMPLOYEE
+        WHERE EMP_DEP_ID = #{0}
+    </select>
+
     <resultMap id="findEmployee" type="com.nanyu.model.T_Employee">
         <id property="emp_id" column="EMP_ID"/>
         <result property="emp_code" column="EMP_CODE"/>

@@ -12,4 +12,6 @@ public interface EmployeeService {
 
     List<T_Employee> findPosEmpty(int dep_id,int pos_id);//查找是否有指定工作的员工
     List<T_Employee> findEmployeeState(int state);//查找指定状态的员工
+
+    List<T_Employee> findDepEmployee(int dep_id);//查找指定部门的员工
 }

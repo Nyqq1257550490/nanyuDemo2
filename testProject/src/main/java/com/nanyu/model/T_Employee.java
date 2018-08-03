@@ -13,7 +13,7 @@ public class T_Employee {
     private String emp_hiredate;
     private T_Department department;
     private T_Position position;
-    private int emp_status = 1;//1在职 2 请假 0离职
+    private int emp_status = 1;//0实习生 1在职 2请假 -1离职
     private String emp_company;
     private String emp_phone;
     private String emp_email;

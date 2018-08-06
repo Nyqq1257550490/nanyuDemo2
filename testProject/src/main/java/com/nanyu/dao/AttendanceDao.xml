@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.AttendanceDao">
+    <select id="findAttExist" parameterType="com.nanyu.model.T_ATTENDANCE" resultType="com.nanyu.model.T_ATTENDANCE">
+        SELECT * FROM T_ATTENDANCE WHERE A_EMP_ID = #{employee.emp_id}
+        and A_DATETIME = #{a_datetime}
+    </select>
+
+    <insert id="saveNewAttendance" parameterType="com.nanyu.model.T_ATTENDANCE">
+        INSERT INTO T_ATTENDANCE(A_ID, A_STARTTIME, A_STATE, A_EMP_ID, A_DATETIME)
+        VALUES (T_ATTENDANCE_SEQ.nextval,#{a_starttime},#{a_state},#{employee.emp_id},#{a_datetime})
+    </insert>
+
+    <update id="updateNewAttendance" parameterType="com.nanyu.model.T_ATTENDANCE">
+        UPDATE T_ATTENDANCE SET A_ENDTIME = #{a_endtime}
+        where A_ID = #{a_id}
+    </update>
+
+</mapper>

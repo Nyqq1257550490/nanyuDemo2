@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nanyu.dao.DesertDao">
+    <select id="findDesert" parameterType="com.nanyu.model.T_DESERT" resultType="com.nanyu.model.T_DESERT">
+        SELECT * FROM T_DESERT WHERE DE_EMP_ID = #{employee.emp_id}
+        and DE_TIME = #{de_time} and DE_STATE = #{de_state}
+    </select>
+
+    <update id="updateNewDesert" parameterType="com.nanyu.model.T_DESERT">
+        UPDATE T_DESERT SET DE_MONEY = #{de_money}
+        where DE_ID = #{de_id}
+    </update>
+
+    <insert id="saveDesert" parameterType="com.nanyu.model.T_DESERT">
+        INSERT INTO T_DESERT(DE_ID, DE_EMP_ID, DE_TIME, DE_INTRO, DE_MONEY, DE_STATE)
+        VALUES (T_DESERT_SEQ.nextval,#{employee.emp_id},#{de_time},#{de_intro},#{de_money},#{de_state})
+    </insert>
+
+</mapper>

@@ -4,6 +4,7 @@ import com.nanyu.model.T_Department;
 import com.nanyu.model.T_Employee;
 import com.nanyu.model.T_Position;
 import com.nanyu.service.EmployeeService;
+import com.nanyu.tools.TimeTool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,16 +107,7 @@ public class EmployeeController {
 
     }
 
-    /**
-     * 跳转员工考勤打卡界面
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("/goEmpClockIn")
-    public String goEmpClockIn()throws Exception{
 
-        return "employeepages/employeeDesert";
-    }
 
 
 
